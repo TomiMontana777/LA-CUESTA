@@ -1,0 +1,78 @@
+{% extends "producto/base_producto.html" %}
+
+{% load  static %}
+
+{% block panel-content %}
+
+<div class="grid-x grid-margin-x">
+  <div class="cell grid-x grid-margin-x">
+    <form class="cell small-9 input-group" method="GET">
+      <span class="input-group-label" style="background-color: coral;">COD</span>
+      <input class="input-group-field" type="text" id="kword" name="kword" placeholder="Nombre o codigo...">
+      <div class="input-group-button">
+        <input type="submit" class="button secondary" value="Buscar">
+      </div>
+    </form>
+    <div class="cell small-3">
+      <a href="{% url 'producto_app:producto-add' %}" class="button success">Registrar Nuevo</a>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <p class="h5">Filtrar por:</p>
+</div>
+
+  <div class="cell grid-x grid-margin-x">
+    <div class="cell small-2">
+      <a href="?order=name">
+        <span class="label warning">Nombre</span>
+      </a>
+    </div>
+    <div class="cell small-2">
+      <a href="?order=date">
+        <span class="label secondary">Fecha</span>
+      </a>
+    </div>
+    <div class="cell small-2">
+      <a href="?order=stok">
+        <span class="label">Stock</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="cell grid-x grid-margin-x" style="margin-top: 2em;">
+    <div class="text-center mb-4">
+      <h2 class="display-4">Lista de productos</h2>
+    </div>
+  
+    <table class="hover">
+      <thead >
+        <th style="background-color: coral;">ID</th>
+        <th style="background-color: coral;">Nombres</th>
+        <th style="background-color: coral;">Precio Venta</th>
+        <th style="background-color: coral;">Precio Compra</th>
+        <th style="background-color: coral;">Stock</th>
+        <th style="background-color: coral;">Núm. Ventas</th>
+        <th style="background-color: coral;">Acciones</th>
+      </thead>
+      <tbody>
+        {% for producto in productos %}
+          <tr>
+            <td>{{producto.barcode}}</td>
+            <td>{{producto.name}}</td>
+            <td>{{producto.sale_price}}</td>
+            <td>{{producto.purchase_price}}</td>
+            <td>{{producto.count}}</td>
+            <td>{{producto.num_sale}}</td>
+            <td>
+              <a href="{% url 'producto_app:producto-update' producto.id %}" class="button"><i class="fi-pencil"></i></a>
+              <a href="{% url 'producto_app:producto-detail' producto.id %}" class="button warning"><i class="fi-eye"></i></a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock panel-content %}

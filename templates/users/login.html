@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="logo" style="background-image: url(static/images/logo.jpg);
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+width: 100%;
+height: 100%;">
+  <div class="grid-container">
+    <div class="grid-y medium-grid-frame align-center">
+      <div class="grid-x grid-padding-x align-center">
+        <form class="cell medium-5 grid-x grid-margin-x" method="POST" style = "border: 1px solid rgba(66, 66, 66, 0.6); padding: 2em; border-radius: 10px; background-color: rgba(44, 35, 54, 0.6);">
+          {% csrf_token %}
+          <h4 class="cell" style="text-align: center; color: white;">Acceso al Sistema</h4>
+          <div class="cell medium-12">
+            <label style="color: white;">Email:</label>
+            <div class="input-group">
+              <span class="input-group-label"><i class="fi-mail"></i></span>
+              {{ form.email }}
+            </div>
+          </div>
+          <div class="cell medium-12">
+            <label style="color: white;">Password:</label>
+            <div class="input-group">
+              <span class="input-group-label"><i class="fi-lock"></i></span>
+              {{ form.password }}
+            </div>
+          </div>
+          <button type="submit" class="cell warning button" style="background-color: coral;">Ingresar</button>
+          
+          <!-- Enlace para "Olvidé mi contraseña" -->
+          <div class="cell" style="text-align: center; margin-top: 1em;">
+            <a href="#" style="color: coral;">¿Olvidaste tu contraseña?</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
